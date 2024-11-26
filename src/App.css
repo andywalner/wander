@@ -132,4 +132,25 @@ input:disabled {
   .recommendations {
     grid-template-columns: 1fr;
   }
+}
+
+.recommendation-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.youtube-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.6;
+  font-size: 0.9em;
+  padding: 4px 8px;
+  transition: opacity 0.2s;
+}
+
+.youtube-button:hover {
+  opacity: 1;
 } 

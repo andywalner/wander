@@ -94,7 +94,16 @@ function App() {
               <div className="recommendations">
                 {recommendations.map((rec, index) => (
                   <div key={index} className="recommendation-card">
-                    <h3>{rec.name}</h3>
+                    <div className="recommendation-header">
+                      <h3>{rec.name}</h3>
+                      <button
+                        onClick={() => window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(rec.name)}`, '_blank')}
+                        className="youtube-button"
+                        title="Search on YouTube"
+                      >
+                        🎥
+                      </button>
+                    </div>
                     <p>{rec.description}</p>
                   </div>
                 ))}
