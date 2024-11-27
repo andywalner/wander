@@ -11,7 +11,7 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null); // Clear any previous errors
+    setError(null);
     
     if (loading) return;
 
@@ -29,11 +29,11 @@ function App() {
         messages: [
           { 
             role: "system", 
-            content: "You are a travel guide expert. Return only a raw JSON array of objects, each with 'name' and 'description' properties. Do not include markdown formatting or code blocks." 
+            content: "You are a no bullshit travel guide who shares useful details in the tone of a helpful friend. Return only a raw JSON array of objects. Each object must have exactly these fields: 'name', 'vibe', 'bestFor', 'customField1Name', 'customField1Value', 'customField2Name', 'customField2Value'. The custom fields should be relevant to the type of place (e.g., for a restaurant: customField1Name='Cuisine', customField1Value='Italian'). Do not include markdown formatting or code blocks."
           },
           {
             role: "user",
-            content: `Give me exactly 5 must-visit places in ${city}. Response must be a JSON array of objects, each with 'name' and 'description' fields.`
+            content: `Give me exactly 5 must-visit places in ${city}. For each place, include name, vibe, what it's best for, and two custom fields that are relevant to that specific place. For example, a restaurant might have 'Food' with highlights of the food and 'Price Range', a cocktail bar might have "Drinks", a park might have 'Activities', a museum might have 'Famous Works', a mall might have "Things to See". These don't need to be literal examples - feel free to use whatever custom fields are most interesting and useful to highlight the place! Return details in full sentences in the tone of a helpful friend.`
           }
         ],
       });
@@ -97,14 +97,17 @@ function App() {
                     <div className="recommendation-header">
                       <h3>{rec.name}</h3>
                       <button
-                        onClick={() => window.open(`https://www.youtube.com/results?search_query=${encodeURIComponent(rec.name)}`, '_blank')}
+                        onClick={() => window.open(`https://www.tiktok.com/search?q=${encodeURIComponent(rec.name)}`, '_blank')}
                         className="youtube-button"
-                        title="Search on YouTube"
+                        title="Search on TikTok"
                       >
-                        🎥
+                        📱
                       </button>
                     </div>
-                    <p>{rec.description}</p>
+                    <p><strong>Vibe:</strong> {rec.vibe}</p>
+                    <p><strong>Best For:</strong> {rec.bestFor}</p>
+                    <p><strong>{rec.customField1Name}:</strong> {rec.customField1Value}</p>
+                    <p><strong>{rec.customField2Name}:</strong> {rec.customField2Value}</p>
                   </div>
                 ))}
               </div>
